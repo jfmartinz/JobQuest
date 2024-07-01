@@ -11,10 +11,10 @@
           <ul class="flex h-full items-center">
             <li
               v-for="menuItem in menuItems"
-              :key="menuItem"
+              :key="menuItem.text"
               class="my-4 ml-5 flex h-full items-center first:ml-0"
             >
-              <a href="#">{{ menuItem }}</a>
+              <router-link :to="menuItem.url">{{ menuItem.text }}</router-link>
             </li>
           </ul>
         </nav>
@@ -48,7 +48,13 @@ export default {
   },
   data() {
     return {
-      menuItems: ['Teams', 'Locations', 'Benefits', 'Jobs', 'Students'],
+      menuItems: [
+        { text: 'Teams', url: '/' },
+        { text: 'Locations', url: '/' },
+        { text: 'Benefits', url: '/' },
+        { text: 'Jobs', url: '/jobs/results' },
+        { text: 'Students', url: '/' }
+      ],
       isLogin: false
     };
   },
