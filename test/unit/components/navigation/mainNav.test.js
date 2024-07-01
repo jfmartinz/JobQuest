@@ -2,14 +2,15 @@ import { render, screen } from '@testing-library/vue';
 
 import MainNav from '@/components/navigation/MainNav.vue';
 import { describe, expect } from 'vitest';
-// import ProfileImage from '@/components/ProfileImage.vue'
 import userEvent from '@testing-library/user-event';
+import { RouterLinkStub } from '@vue/test-utils';
 
 const renderMainNav = () => {
   render(MainNav, {
     global: {
       stubs: {
-        FontAwesomeIcon: true
+        FontAwesomeIcon: true,
+        RouterLink: RouterLinkStub
       }
     }
   });
