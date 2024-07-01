@@ -2,10 +2,10 @@
   <header :class="['w-full', 'text-sm', headerHeightClass]">
     <div class="fixed left-0 top-0 h-16 w-full border-b border-gray-300">
       <div class="mx-auto flex h-full flex-nowrap border-brand-gray-1 px-8">
-        <a
-          href="#"
+        <router-link
+          to="/"
           class="flex items-center text-xl"
-          >{{ company }}</a
+          >JobQuest</router-link
         >
         <nav class="ml-12 h-full">
           <ul class="flex h-full items-center">
@@ -48,7 +48,6 @@ export default {
   },
   data() {
     return {
-      company: 'JobQuest',
       menuItems: ['Teams', 'Locations', 'Benefits', 'Jobs', 'Students'],
       isLogin: false
     };
