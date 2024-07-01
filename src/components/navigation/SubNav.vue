@@ -18,12 +18,12 @@
 <script>
 export default {
   name: 'SubNav',
-  data() {
-    return {
-      onJobResultPage: true
+  computed: {
+    onJobResultPage() {
+      return this.$route.name === 'JobResults';
     }
   }
-}
+};
 </script>
 
 <style scoped></style>

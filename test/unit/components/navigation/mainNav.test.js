@@ -6,8 +6,14 @@ import userEvent from '@testing-library/user-event';
 import { RouterLinkStub } from '@vue/test-utils';
 
 const renderMainNav = () => {
+  const $route = {
+    name: 'Home'
+  };
   render(MainNav, {
     global: {
+      mocks: {
+        $route
+      },
       stubs: {
         FontAwesomeIcon: true,
         RouterLink: RouterLinkStub

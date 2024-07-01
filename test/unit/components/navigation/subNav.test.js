@@ -6,16 +6,18 @@ import { describe } from 'vitest';
 describe('SubNav', () => {
   describe('when user is on jobs page', () => {
     it('display a jobs count', () => {
+      const $route = {
+        name: 'JobResults'
+      };
+
       render(SubNav, {
         global: {
+          mocks: {
+            $route
+          },
           stubs: {
             FontAwesomeIcon: true
           }
-        },
-        data() {
-          return {
-            onJobResultPage: true
-          };
         }
       });
       const jobCount = screen.getByText('20');
@@ -26,16 +28,17 @@ describe('SubNav', () => {
 
   describe('when user is not on jobs page', () => {
     it('does not display the jobs count', () => {
+      const $route = {
+        name: 'Home'
+      };
       render(SubNav, {
         global: {
+          mocks: {
+            $route
+          },
           stubs: {
             FontAwesomeIcon: true
           }
-        },
-        data() {
-          return {
-            onJobResultPage: false
-          };
         }
       });
       const jobCount = screen.queryByText('20');
