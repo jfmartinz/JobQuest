@@ -1,4 +1,4 @@
-import { getByRole, render, screen } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 
 import JobSearchForm from '@/components/jobSearch/JobSearchForm.vue';
