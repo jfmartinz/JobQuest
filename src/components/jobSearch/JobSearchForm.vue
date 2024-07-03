@@ -10,8 +10,14 @@
 
     <div class="flex h-full flex-1 flex-nowrap text-base font-light">
       <div class="relative flex h-full flex-1 items-center pr-3">
-        <label class="absolute -top-10 left-0"> Role </label>
+        <label
+          for="role"
+          class="absolute -top-10 left-0"
+        >
+          Role
+        </label>
         <text-input
+          id="role"
           v-model="role"
           placeholder="Software Engineer"
         />
@@ -24,8 +30,14 @@
       </span>
 
       <div class="relative flex h-full flex-1 items-center pl-3">
-        <label class="absolute -top-10 left-0"> Where?</label>
+        <label
+          for="location"
+          class="absolute -top-10 left-0"
+        >
+          Where?</label
+        >
         <text-input
+          id="location"
           v-model="location"
           placeholder="Los Angeles"
         />
