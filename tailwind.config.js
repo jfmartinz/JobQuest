@@ -18,7 +18,8 @@ export default {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans]
       },
       boxShadow: {
-        blue: '1px 1px 2px #4285f4'
+        blue: '1px 1px 2px #4285f4',
+        gray: '0 1px 3px 0 rgba(60, 64, 67, .3)'
       }
     }
   }
