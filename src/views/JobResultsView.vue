@@ -1,15 +1,18 @@
 <template>
   <div>
-    <JobFiltersSidebar />
+    <job-filters-sidebar />
+    <job-listings />
   </div>
 </template>
 
 <script>
 import JobFiltersSidebar from '@/components/JobResults/JobsFiltersSidebar/JobFiltersSidebar.vue';
+import JobListings from '@/components/JobResults/JobListings.vue';
 export default {
   name: 'JobResultsView',
   components: {
-    JobFiltersSidebar
+    JobFiltersSidebar,
+    JobListings
   }
 };
 </script>
