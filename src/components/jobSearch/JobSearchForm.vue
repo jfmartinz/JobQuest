@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import ActionButton from '@/components/navigation/ActionButton.vue';
+import ActionButton from '@/components/Navigation/ActionButton.vue';
 import TextInput from '@/components/TextInput.vue';
 export default {
   name: 'JobSearchForm',
