@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/vue';
 
-import MainNav from '@/components/navigation/MainNav.vue';
+import MainNav from '@/components/Navigation/MainNav.vue';
 import { describe, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { RouterLinkStub } from '@vue/test-utils';

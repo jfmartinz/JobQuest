@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/vue';
 
-import SubNav from '@/components/navigation/SubNav.vue';
+import SubNav from '@/components/Navigation/SubNav.vue';
 import { describe } from 'vitest';
 
 const renderSubNav = (routerName) => {

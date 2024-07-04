@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 
 import JobSearchForm from '@/components/jobSearch/JobSearchForm.vue';
-import { describe, it } from 'vitest';
 
 describe('JobSearchForm', () => {
   describe('when user submits a form', () => {
