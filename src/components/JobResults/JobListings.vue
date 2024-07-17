@@ -26,7 +26,11 @@ export default {
   },
   computed: {
     displayedJobs() {
-      return this.jobs.slice(0, 10);
+      const pageStr = this.$route.query.page || '1';
+      const pageNum = Number.parseInt(pageStr);
+      const firstJobIndex = (pageNum - 1) * 10;
+      const lastJobIndex = pageNum * 10;
+      return this.jobs.slice(firstJobIndex, lastJobIndex);
     }
   },
   async mounted() {
