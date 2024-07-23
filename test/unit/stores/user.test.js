@@ -1,11 +1,10 @@
 import { createPinia, setActivePinia } from 'pinia';
 
 import { useUserStore } from '@/stores/user';
-
+beforeEach(() => {
+  setActivePinia(createPinia());
+});
 describe('state', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia());
-  });
   it('keeps track of if user is logged in', () => {
     const store = useUserStore();
     expect(store.isLoggedIn).toBe(false);
