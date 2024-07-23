@@ -26,13 +26,18 @@ describe('JobListings', () => {
     });
   }
    
+  beforeEach(() => {
+    // Mock the environment variable
+    process.env.VITE_APP_API_URL = 'http://myfakeapi.com';
+  });
+
   it('fetches job', () => {
     axios.get.mockResolvedValue({ data: [] });
     const $route = createRoute();
       
     renderJobListings($route);
 
-    expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/jobs');
+    expect(axios.get).toHaveBeenCalledWith('http://myfakeapi.com/jobs');
   });
   
   it('displays a maximum of 10 jobs', async () => {
