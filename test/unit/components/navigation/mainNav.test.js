@@ -5,9 +5,10 @@ import { describe, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { RouterLinkStub } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
+import { useUserStore } from '@/stores/user';
 
 const renderMainNav = () => {
-  const pinia = createTestingPinia({ stubActions: false });
+  const pinia = createTestingPinia();
 
   const $route = {
     name: 'Home'
@@ -44,6 +45,7 @@ describe('MainNav', () => {
   describe('When the user logs in', () => {
     it('display the user profile image', async () => {
       renderMainNav();
+      const userStore = useUserStore();
       let profileImage = screen.queryByRole('img', {
         name: /user profile/i
       });
@@ -53,7 +55,7 @@ describe('MainNav', () => {
       const loginButton = screen.getByRole('button', {
         name: /sign in/i
       });
-
+      userStore.isLoggedIn = true;
       await userEvent.click(loginButton);
 
       profileImage = screen.queryByRole('img', {
