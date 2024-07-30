@@ -1,16 +1,10 @@
 import { render, screen } from '@testing-library/vue';
 import { RouterLinkStub } from '@vue/test-utils';
-import axios from 'axios';
 import JobListings from '@/components/JobResults/JobListings.vue';
-import { createPinia, setActivePinia } from 'pinia';
-vi.mock('axios');
+import { createTestingPinia } from '@pinia/testing';
+import { useJobsStore } from '@/stores/jobs';
 
 describe('JobListings', () => {
-  const pinia = createPinia();
-  beforeEach(() => {
-    setActivePinia(createPinia());
-  });
-
   const createRoute = (queryParams) => ({
     query: {
       page: '5',
@@ -19,6 +13,7 @@ describe('JobListings', () => {
   });
 
   const renderJobListings = ($route) => {
+    const pinia = createTestingPinia();
     render(JobListings, {
       global: {
         plugins: [pinia],
@@ -38,20 +33,20 @@ describe('JobListings', () => {
   });
 
   it('fetches job', () => {
-    axios.get.mockResolvedValue({ data: [] });
     const $route = createRoute();
 
     renderJobListings($route);
-
-    expect(axios.get).toHaveBeenCalledWith('http://myfakeapi.com/jobs');
+    const jobStore = useJobsStore();
+    expect(jobStore.FETCH_JOBS).toHaveBeenCalled();
   });
 
   it('displays a maximum of 10 jobs', async () => {
-    axios.get.mockResolvedValue({ data: Array(15).fill({}) });
     const queryParams = { page: '1' };
     const $route = createRoute(queryParams);
-
     renderJobListings($route);
+
+    const jobStore = useJobsStore();
+    jobStore.jobs = Array(15).fill({});
 
     const jobListings = await screen.findAllByRole('listitem');
     expect(jobListings).toHaveLength(10);
