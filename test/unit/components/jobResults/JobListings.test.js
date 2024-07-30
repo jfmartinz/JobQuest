@@ -6,6 +6,7 @@ import { createPinia, setActivePinia } from 'pinia';
 vi.mock('axios');
 
 describe('JobListings', () => {
+  const pinia = createPinia();
   beforeEach(() => {
     setActivePinia(createPinia());
   });
@@ -20,6 +21,7 @@ describe('JobListings', () => {
   const renderJobListings = ($route) => {
     render(JobListings, {
       global: {
+        plugins: [pinia],
         mocks: {
           $route
         },
