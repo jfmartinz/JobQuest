@@ -17,8 +17,13 @@
 </template>
 
 <script>
+import ActionButton from '@/components/Navigation/ActionButton.vue';
+
 export default {
-  name: 'JobFiltersSidebar'
+  name: 'JobFiltersSidebar',
+  components: {
+    ActionButton
+  }
 };
 </script>
 <style scoped></style>
