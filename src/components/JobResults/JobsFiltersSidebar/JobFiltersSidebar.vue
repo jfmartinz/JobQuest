@@ -12,17 +12,21 @@
           ></action-button>
         </div>
       </div>
+
+      <collapsible-accordion> Hello Custom Component </collapsible-accordion>
     </section>
   </div>
 </template>
 
 <script>
 import ActionButton from '@/components/Navigation/ActionButton.vue';
+import CollapsibleAccordion from '@/components/CollapsibleAccordion.vue';
 
 export default {
   name: 'JobFiltersSidebar',
   components: {
-    ActionButton
+    ActionButton,
+    CollapsibleAccordion
   }
 };
 </script>
