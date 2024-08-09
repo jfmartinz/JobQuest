@@ -12,8 +12,7 @@
           ></action-button>
         </div>
       </div>
-
-      <collapsible-accordion>
+      <collapsible-accordion header="Organizations">
         <div class="mt-5">
           <fieldset>
             <ul class="flex flex-row flex-wrap">
