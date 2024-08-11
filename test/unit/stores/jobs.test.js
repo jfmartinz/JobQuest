@@ -23,3 +23,22 @@ describe('State', () => {
     });
   });
 });
+
+describe('Getters', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia());
+  });
+
+  describe('UNIQUE_ORGANIZATION', () => {
+    it('returns a Set of unique organizations', () => {
+      const store = useJobsStore();
+      store.jobs = [
+        { organization: 'Org 1' },
+        { organization: 'Org 2' },
+        { organization: 'Org 1' }
+      ];
+      const orgs = store.UNIQUE_ORGANIZATION;
+      expect(orgs).toEqual(new Set(['Org 1', 'Org 2']));
+    });
+  });
+});
