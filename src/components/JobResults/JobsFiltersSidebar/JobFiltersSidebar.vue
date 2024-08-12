@@ -16,37 +16,17 @@
         <div class="mt-5">
           <fieldset>
             <ul class="flex flex-row flex-wrap">
-              <li class="h-8 w-1/2">
+              <li
+                v-for="organization in UNIQUE_ORGANIZATION"
+                :key="organization"
+                class="h-8 w-1/2"
+              >
                 <input
-                  id="VueTube"
+                  :id="organization"
                   type="checkbox"
                   class="mr-3"
                 />
-                <label for="VueTube">VueTube</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input
-                  id="Between Vue"
-                  type="checkbox"
-                  class="mr-3"
-                />
-                <label for="BetweenVue">Between Vue</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input
-                  id="Et"
-                  type="checkbox"
-                  class="mr-3"
-                />
-                <label for="Et Vue Brute">Et Vue Brute</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input
-                  id="Vue and a Half Men"
-                  type="checkbox"
-                  class="mr-3"
-                />
-                <label for="Vue and a Half Men">Vue and a Half Men</label>
+                <label :for="organization">{{ organization }}</label>
               </li>
             </ul>
           </fieldset>
@@ -60,11 +40,16 @@
 import ActionButton from '@/components/Navigation/ActionButton.vue';
 import CollapsibleAccordion from '@/components/CollapsibleAccordion.vue';
 
+import { mapState } from 'pinia';
+import { useJobsStore, UNIQUE_ORGANIZATION } from '@/stores/jobs';
 export default {
   name: 'JobFiltersSidebar',
   components: {
     ActionButton,
     CollapsibleAccordion
+  },
+  computed: {
+    ...mapState(useJobsStore, [UNIQUE_ORGANIZATION])
   }
 };
 </script>
