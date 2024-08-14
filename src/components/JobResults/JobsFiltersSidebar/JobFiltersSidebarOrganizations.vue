@@ -10,7 +10,9 @@
           >
             <input
               :id="organization"
+              v-model="selectedOrganizations"
               type="checkbox"
+              :value="organization"
               class="mr-3"
             />
             <label :for="organization">{{ organization }}</label>
@@ -29,6 +31,11 @@ export default {
   name: 'JobFiltersSidebarOrganizations',
   components: {
     CollapsibleAccordion
+  },
+  data() {
+    return {
+      selectedOrganizations: []
+    };
   },
   computed: {
     ...mapState(useJobsStore, [UNIQUE_ORGANIZATION])
