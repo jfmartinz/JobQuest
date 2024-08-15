@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', {
     loginUser() {
       this.isLoggedIn = true;
     },
-    ADD_SELECTED_ORGANIZATIONS(organizations) {
+    [ADD_SELECTED_ORGANIZATIONS](organizations) {
       this.selectedOrganizations = organizations;
     }
   }
