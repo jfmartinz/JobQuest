@@ -12,6 +12,12 @@ describe('User Store', () => {
       const store = useUserStore();
       expect(store.isLoggedIn).toBe(false);
     });
+
+    it('stores organizations that the user would like to filter out by', () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_ORGANIZATIONS(['org1', 'org2']);
+      expect(store.selectedOrganizations).toEqual(['org1', 'org2']);
+    });
   });
 
   describe('action', () => {
