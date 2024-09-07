@@ -2,6 +2,7 @@ import { createPinia, setActivePinia } from 'pinia';
 import axios from 'axios';
 import { useJobsStore } from '@/stores/jobs';
 import { useUserStore } from '@/stores/user';
+import { describe, expect } from 'vitest';
 
 vi.mock('axios');
 
@@ -59,6 +60,26 @@ describe('Getters', () => {
       expect(result).toEqual([
         { organization: 'Org 1' },
         { organization: 'Org 2' }
+      ]);
+    });
+  });
+
+  describe('when the user has not selected any organizations', () => {
+    it('returns all jobs', () => {
+      const jobStore = useJobsStore();
+      jobStore.jobs = [
+        { organization: 'Org 1' },
+        { organization: 'Org 2' },
+        { organization: 'Org 3' }
+      ];
+      const userStore = useUserStore();
+      userStore.selectedOrganizations = [];
+
+      const result = jobStore.FILTERED_JOBS_BY_ORGANIZATION;
+      expect(result).toEqual([
+        { organization: 'Org 1' },
+        { organization: 'Org 2' },
+        { organization: 'Org 3' }
       ]);
     });
   });
