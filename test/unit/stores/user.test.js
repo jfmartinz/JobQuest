@@ -18,6 +18,11 @@ describe('User Store', () => {
       store.ADD_SELECTED_ORGANIZATIONS(['org1', 'org2']);
       expect(store.selectedOrganizations).toEqual(['org1', 'org2']);
     });
+
+    it('stores job type that the user would like to filter out by', () => {
+      const userStore = useUserStore();
+      expect(userStore.selectedJobTypes).toEqual([]);
+    });
   });
 
   describe('action', () => {
