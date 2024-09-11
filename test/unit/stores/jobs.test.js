@@ -57,6 +57,26 @@ describe('Getters', () => {
     });
   });
 
+  describe('FILTERED_JOBS_BY_JOB_TYPES', () => {
+    it('filters jobs by job types', () => {
+      const jobStore = useJobsStore();
+      jobStore.jobs = [
+        { jobType: 'jobType1' },
+        { jobType: 'jobType2' },
+        { jobType: 'jobType3' }
+      ];
+      const userStore = useUserStore();
+
+      userStore.selectedJobTypes = ['jobType1', 'jobType2'];
+
+      const result = jobStore.FILTERED_JOBS_BY_JOB_TYPES;
+      expect(result).toEqual([
+        { jobType: 'jobType1' },
+        { jobType: 'jobType2' }
+      ]);
+    });
+  });
+
   describe('FILTERED_JOBS_BY_ORGANIZATION', () => {
     it('filters jobs by organization', () => {
       const jobStore = useJobsStore();
