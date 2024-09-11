@@ -116,4 +116,24 @@ describe('Getters', () => {
       ]);
     });
   });
+
+  describe('when the user has not selected any job types', () => {
+    it('returns all jobs', () => {
+      const jobStore = useJobsStore();
+      jobStore.jobs = [
+        { jobType: 'jobType1' },
+        { jobType: 'jobType2' },
+        { jobType: 'jobType3' }
+      ];
+      const userStore = useUserStore();
+      userStore.selectedJobTypes = [];
+
+      const result = jobStore.FILTERED_JOBS_BY_JOB_TYPES;
+      expect(result).toEqual([
+        { jobType: 'jobType1' },
+        { jobType: 'jobType2' },
+        { jobType: 'jobType3' }
+      ]);
+    });
+  });
 });
