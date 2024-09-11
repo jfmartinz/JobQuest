@@ -44,6 +44,19 @@ describe('Getters', () => {
     });
   });
 
+  describe('UNIQUE_JOB_TYPES', () => {
+    it('returns a Set of unique job types', () => {
+      const store = useJobsStore();
+      store.jobs = [
+        { jobType: 'jobType1' },
+        { jobType: 'jobType2' },
+        { jobType: 'jobType1' }
+      ];
+      const jobTypes = store.UNIQUE_JOB_TYPES;
+      expect(jobTypes).toEqual(new Set(['jobType1', 'jobType2']));
+    });
+  });
+
   describe('FILTERED_JOBS_BY_ORGANIZATION', () => {
     it('filters jobs by organization', () => {
       const jobStore = useJobsStore();
