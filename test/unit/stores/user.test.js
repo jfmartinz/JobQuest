@@ -31,5 +31,12 @@ describe('User Store', () => {
       store.loginUser();
       expect(store.isLoggedIn).toBe(true);
     });
+    describe('ADD_SELECTED_JOB_TYPES', () => {
+      it('updates job types the user has chosen to filter jobs by ', () => {
+        const userStore = useUserStore();
+        userStore.ADD_SELECTED_JOB_TYPES(['jobType1', 'jobType2']);
+        expect(userStore.selectedJobTypes).toEqual(['jobType1', 'jobType2']);
+      });
+    });
   });
 });
