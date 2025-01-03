@@ -30,7 +30,7 @@ describe('JobListing', () => {
       },
       props: {
         job: {
-          title: 'AirBnB'
+          organization: 'AirBnB'
         }
       }
     });

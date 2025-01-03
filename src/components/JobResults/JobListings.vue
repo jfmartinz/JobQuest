@@ -1,16 +1,22 @@
 <template>
   <main class="flex-auto bg-brand-gray-2 p-8">
-    <ol>
+    <ol v-if="displayedJobs.length > 0">
       <job-listing
         v-for="job in displayedJobs"
         :key="job.id"
         :job="job"
       />
     </ol>
-
+    <span v-else>{{ FILTERED_JOBS.length }} </span>
+    Jobs Matched
     <div class="mx-auto mt-8">
       <div class="flex flex-row flex-nowrap">
-        <p class="flex-grow text-sm">Page {{ currentPage }}</p>
+        <p
+          v-if="displayedJobs.length > 0"
+          class="flex-grow text-sm"
+        >
+          Page {{ currentPage }}
+        </p>
         <div class="flex items-center justify-center">
           <router-link
             v-if="previousPage"
@@ -34,47 +40,38 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import JobListing from '@/components/JobResults/JobListing.vue';
-import { useJobsStore, FETCH_JOBS, FILTERED_JOBS } from '@/stores/jobs';
-import { mapActions, mapState } from 'pinia';
+import { useJobsStore } from '@/stores/jobs';
+import { computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
-export default {
-  name: 'JobListings',
-  components: {
-    JobListing
-  },
-  computed: {
-    previousPage() {
-      const previousPage = this.currentPage - 1;
-      const firstPage = 1;
+const jobStore = useJobsStore();
+onMounted(jobStore.FETCH_JOBS);
 
-      return previousPage >= firstPage ? previousPage : undefined;
-    },
-    currentPage() {
-      return Number.parseInt(this.$route.query.page || '1');
-    },
-    ...mapState(useJobsStore, {
-      FILTERED_JOBS,
-      nextPage() {
-        const nextPage = this.currentPage + 1;
-        const lastPage = Math.ceil(this.FILTERED_JOBS.length / 10);
+const route = useRoute();
+const currentPage = computed(() => Number.parseInt(route.query.page || '1'));
 
-        return nextPage <= lastPage ? nextPage : undefined;
-      },
-      displayedJobs() {
-        const pageNum = this.currentPage;
-        const firstJobIndex = (pageNum - 1) * 10;
-        const lastJobIndex = pageNum * 10;
-        return this.FILTERED_JOBS.slice(firstJobIndex, lastJobIndex);
-      }
-    })
-  },
-  async mounted() {
-    this.FETCH_JOBS();
-  },
-  methods: {
-    ...mapActions(useJobsStore, [FETCH_JOBS])
-  }
-};
+const FILTERED_JOBS = computed(() => jobStore.FILTERED_JOBS);
+
+const previousPage = computed(() => {
+  const previousPage = currentPage.value - 1;
+  const firstPage = 1;
+
+  return previousPage >= firstPage ? previousPage : undefined;
+});
+
+const nextPage = computed(() => {
+  const nextPage = currentPage.value + 1;
+  const lastPage = Math.ceil(FILTERED_JOBS.value.length / 10);
+
+  return nextPage <= lastPage ? nextPage : undefined;
+});
+
+const displayedJobs = computed(() => {
+  const pageNum = currentPage.value;
+  const firstJobIndex = (pageNum - 1) * 10;
+  const lastJobIndex = pageNum * 10;
+  return FILTERED_JOBS.value.slice(firstJobIndex, lastJobIndex);
+});
 </script>

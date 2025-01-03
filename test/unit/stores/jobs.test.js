@@ -68,7 +68,7 @@ describe('Getters', () => {
       const userStore = useUserStore();
       userStore.selectedOrganizations = [];
 
-      const result = jobStore.FILTERED_JOBS_BY_ORGANIZATION;
+      const result = jobStore.FILTERED_JOBS;
       expect(result).toEqual([
         { organization: 'Org 1' },
         { organization: 'Org 2' },
@@ -88,7 +88,7 @@ describe('Getters', () => {
       const userStore = useUserStore();
       userStore.selectedJobTypes = [];
 
-      const result = jobStore.FILTERED_JOBS_BY_JOB_TYPES;
+      const result = jobStore.FILTERED_JOBS;
       expect(result).toEqual([
         { jobType: 'jobType1' },
         { jobType: 'jobType2' },

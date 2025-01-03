@@ -12,24 +12,32 @@
           ></action-button>
         </div>
       </div>
-      <job-filters-sidebar-job-types />
-      <job-filters-sidebar-organizations />
+
+      <jobs-filter-sidebar-checkbox-group
+        header="Job Types"
+        :unique-values="UNIQUE_JOB_TYPES"
+        :action="userStore.ADD_SELECTED_JOB_TYPES"
+      />
+      <jobs-filter-sidebar-checkbox-group
+        header="Organizations"
+        :unique-values="UNIQUE_ORGANIZATIONS"
+        :action="userStore.ADD_SELECTED_ORGANIZATIONS"
+      />
     </section>
   </div>
 </template>
 
-<script>
+<script setup>
 import ActionButton from '@/components/Navigation/ActionButton.vue';
-import JobFiltersSidebarOrganizations from './JobFiltersSidebarOrganizations.vue';
-import JobFiltersSidebarJobTypes from './JobFiltersSidebarJobTypes.vue';
+import JobsFilterSidebarCheckboxGroup from './JobsFilterSidebarCheckboxGroup.vue';
+import { computed } from 'vue';
+import { useJobsStore } from '@/stores/jobs';
+import { useUserStore } from '@/stores/user';
 
-export default {
-  name: 'JobFiltersSidebar',
-  components: {
-    ActionButton,
-    JobFiltersSidebarOrganizations,
-    JobFiltersSidebarJobTypes
-  }
-};
+const jobStore = useJobsStore();
+const userStore = useUserStore();
+
+const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
+const UNIQUE_ORGANIZATIONS = computed(() => jobStore.UNIQUE_ORGANIZATION);
 </script>
 <style scoped></style>
