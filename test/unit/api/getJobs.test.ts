@@ -1,12 +1,13 @@
 import axios from 'axios';
 import getJobs from '@/api/getJobs';
-import { beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Mock } from 'vitest';
 
 vi.mock('axios');
-
+const mockAxios = axios.get as Mock;
 describe('getJobs', () => {
   beforeEach(() => {
-    axios.get.mockResolvedValue({
+    mockAxios.mockResolvedValue({
       data: { id: 1, title: 'Software Engineer' }
     });
   });
