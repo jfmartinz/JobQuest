@@ -2,9 +2,12 @@ import { createPinia, setActivePinia } from 'pinia';
 import axios from 'axios';
 import { useJobsStore } from '@/stores/jobs';
 import { useUserStore } from '@/stores/user';
-import { describe, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-vi.mock('axios');
+import type { Job } from '@/api/types';
+
+import type { Mock } from 'vitest';
+const axiosGetMock = axios.get as Mock;
 
 describe('State', () => {
   beforeEach(() => {
@@ -18,7 +21,7 @@ describe('State', () => {
 
   describe('FETCH_JOBS', () => {
     it('makes an API request and stores received jobs', async () => {
-      axios.get.mockResolvedValue({ data: ['Jobs 1', 'Jobs 2'] });
+      axiosGetMock.mockResolvedValue({ data: ['Jobs 1', 'Jobs 2'] });
       const store = useJobsStore();
       await store.FETCH_JOBS();
       expect(store.jobs).toEqual(['Jobs 1', 'Jobs 2']);
@@ -38,7 +41,7 @@ describe('Getters', () => {
         { organization: 'Org 1' },
         { organization: 'Org 2' },
         { organization: 'Org 1' }
-      ];
+      ] as Job[];
       const orgs = store.UNIQUE_ORGANIZATION;
       expect(orgs).toEqual(new Set(['Org 1', 'Org 2']));
     });
@@ -51,7 +54,7 @@ describe('Getters', () => {
         { jobType: 'jobType1' },
         { jobType: 'jobType2' },
         { jobType: 'jobType1' }
-      ];
+      ] as Job[];
       const jobTypes = store.UNIQUE_JOB_TYPES;
       expect(jobTypes).toEqual(new Set(['jobType1', 'jobType2']));
     });
@@ -64,7 +67,7 @@ describe('Getters', () => {
         { organization: 'Org 1' },
         { organization: 'Org 2' },
         { organization: 'Org 3' }
-      ];
+      ] as Job[];
       const userStore = useUserStore();
       userStore.selectedOrganizations = [];
 
@@ -84,7 +87,7 @@ describe('Getters', () => {
         { jobType: 'jobType1' },
         { jobType: 'jobType2' },
         { jobType: 'jobType3' }
-      ];
+      ] as Job[];
       const userStore = useUserStore();
       userStore.selectedJobTypes = [];
 
