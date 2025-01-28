@@ -35,14 +35,28 @@ describe('Getters', () => {
     setActivePinia(createPinia());
   });
 
+  const createJob = (job: Partial<Job> = {}): Job => ({
+    id: 33,
+    title: 'jQuery Designer',
+    organization: 'Vue and a Half Men',
+    degree: 'Pursuing Degree',
+    jobType: 'Part-time',
+    location: ['Cologne', 'Atlanta', 'Milwaukee'],
+    minimumQualificatons: ['Target seamless relationships'],
+    preferredQualifications: ['Reinvent cross-media markets'],
+    description: ['Interest matter'],
+    dateAdded: '2021-05-28',
+    ...job
+  });
+
   describe('UNIQUE_ORGANIZATION', () => {
     it('returns a Set of unique organizations', () => {
       const store = useJobsStore();
       store.jobs = [
-        { organization: 'Org 1' },
-        { organization: 'Org 2' },
-        { organization: 'Org 1' }
-      ] as Job[];
+        createJob({ organization: 'Org 1' }),
+        createJob({ organization: 'Org 2' }),
+        createJob({ organization: 'Org 1' })
+      ];
       const orgs = store.UNIQUE_ORGANIZATION;
       expect(orgs).toEqual(new Set(['Org 1', 'Org 2']));
     });
@@ -52,10 +66,10 @@ describe('Getters', () => {
     it('returns a Set of unique job types', () => {
       const store = useJobsStore();
       store.jobs = [
-        { jobType: 'jobType1' },
-        { jobType: 'jobType2' },
-        { jobType: 'jobType1' }
-      ] as Job[];
+        createJob({ jobType: 'jobType1' }),
+        createJob({ jobType: 'jobType2' }),
+        createJob({ jobType: 'jobType1' })
+      ];
       const jobTypes = store.UNIQUE_JOB_TYPES;
       expect(jobTypes).toEqual(new Set(['jobType1', 'jobType2']));
     });
@@ -65,18 +79,18 @@ describe('Getters', () => {
     it('returns all jobs', () => {
       const jobStore = useJobsStore();
       jobStore.jobs = [
-        { organization: 'Org 1' },
-        { organization: 'Org 2' },
-        { organization: 'Org 3' }
+        createJob({ organization: 'Org 1' }),
+        createJob({ organization: 'Org 2' }),
+        createJob({ organization: 'Org 3' })
       ] as Job[];
       const userStore = useUserStore();
       userStore.selectedOrganizations = [];
 
       const result = jobStore.FILTERED_JOBS;
       expect(result).toEqual([
-        { organization: 'Org 1' },
-        { organization: 'Org 2' },
-        { organization: 'Org 3' }
+        createJob({ organization: 'Org 1' }),
+        createJob({ organization: 'Org 2' }),
+        createJob({ organization: 'Org 3' })
       ]);
     });
   });
@@ -85,18 +99,18 @@ describe('Getters', () => {
     it('returns all jobs', () => {
       const jobStore = useJobsStore();
       jobStore.jobs = [
-        { jobType: 'jobType1' },
-        { jobType: 'jobType2' },
-        { jobType: 'jobType3' }
-      ] as Job[];
+        createJob({ jobType: 'jobType1' }),
+        createJob({ jobType: 'jobType2' }),
+        createJob({ jobType: 'jobType3' })
+      ];
       const userStore = useUserStore();
       userStore.selectedJobTypes = [];
 
       const result = jobStore.FILTERED_JOBS;
       expect(result).toEqual([
-        { jobType: 'jobType1' },
-        { jobType: 'jobType2' },
-        { jobType: 'jobType3' }
+        createJob({ jobType: 'jobType1' }),
+        createJob({ jobType: 'jobType2' }),
+        createJob({ jobType: 'jobType3' })
       ]);
     });
   });
