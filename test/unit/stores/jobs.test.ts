@@ -2,11 +2,12 @@ import { createPinia, setActivePinia } from 'pinia';
 import axios from 'axios';
 import { useJobsStore } from '@/stores/jobs';
 import { useUserStore } from '@/stores/user';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { Job } from '@/api/types';
 
 import type { Mock } from 'vitest';
+vi.mock('axios');
 const axiosGetMock = axios.get as Mock;
 
 describe('State', () => {
