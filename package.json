@@ -36,6 +36,7 @@
     "@testing-library/vue": "^8.0.3",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.10.10",
+    "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/coverage-v8": "^1.5.2",
     "@vue/eslint-config-prettier": "^9.0.0",
