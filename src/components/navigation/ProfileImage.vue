@@ -6,14 +6,8 @@
   />
 </template>
 
-<script>
-export default {
-  name: 'ProfileImage',
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-  data() {
-    return {
-      imageLink: 'https://yourimageshare.com/ib/VzoTnxGxVK.webp'
-    }
-  }
-}
+const imageLink = ref('https://yourimageshare.com/ib/VzoTnxGxVK.webp');
 </script>
